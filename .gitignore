@@ -16,3 +16,15 @@ local.properties
 # 系统残留
 .DS_Store
 Thumbs.db
+
+# Android 构建产物
+Android/app/build/
+Android/build/
+Android/.gradle/
+Android/app/release/
+*.apk
+*.dm
+
+# Inspect Code 导出的报告
+/*.xml
+/.descriptions.xml
