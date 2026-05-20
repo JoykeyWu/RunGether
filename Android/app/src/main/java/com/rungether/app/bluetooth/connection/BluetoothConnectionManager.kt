@@ -102,11 +102,6 @@ class BluetoothConnectionManager(
         _discovering.value = false
     }
 
-    // 当前连接的远端设备地址（若有）
-    fun connectedAddress(): String? {
-        return (_state.value as? ConnectionState.Connected)?.deviceAddress
-    }
-
     // 主动连接指定设备
     @SuppressLint("MissingPermission")
     fun connect(device: BluetoothDevice) {
@@ -117,11 +112,6 @@ class BluetoothConnectionManager(
         adapter.cancelDiscovery()
         _state.value = ConnectionState.Connecting(device.name, device.address)
         managerScope.launch { performConnect(device) }
-    }
-
-    // 断开当前连接
-    fun disconnect() {
-        managerScope.launch { closeQuietly(triggerAlert = false) }
     }
 
     // 发送一段字节到对端
@@ -253,14 +243,6 @@ class BluetoothConnectionManager(
         _discoveredDevices.update { current ->
             val filtered = current.filterNot { it.address == item.address }
             (filtered + item).sortedByDescending { it.rssi.toInt() }
-        }
-    }
-
-    // 释放所有资源（在应用退出或角色切换时调用）
-    fun release() {
-        managerScope.launch {
-            unregisterDiscoveryReceiver()
-            closeQuietly(triggerAlert = false)
         }
     }
 }

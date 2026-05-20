@@ -29,10 +29,6 @@ class LocationService private constructor(appContext: Context) {
     fun hasPermission(): Boolean =
         PermissionUtils.isGranted(applicationContext, PermissionUtils.LOCATION_PERMISSIONS)
 
-    // GPS 提供方是否可用
-    fun isGpsEnabled(): Boolean =
-        locationManager?.isProviderEnabled(LocationManager.GPS_PROVIDER) == true
-
     // 启动定位流：返回 LocationUpdate 的 Flow
     @SuppressLint("MissingPermission")
     fun start(

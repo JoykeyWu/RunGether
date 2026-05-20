@@ -24,7 +24,6 @@
     <string name="role_guide_desc">我是陪跑员，为跑者提供引导</string>
     <string name="role_switch_hint">角色可在设置页随时切换</string>
 
-    <string name="page_role">角色选择</string>
     <string name="page_guide_main">陪跑员引导</string>
     <string name="page_guide_bluetooth">蓝牙配对</string>
     <string name="page_guide_summary">跑步结算</string>
@@ -47,7 +46,6 @@
     <string name="placeholder_under_construction">骨架页，待页面开发阶段补全</string>
 
     <string name="unit_km">km</string>
-    <string name="unit_km_zh">公里</string>
     <string name="unit_pace_per_km">/km</string>
     <string name="metric_distance_total">总距离</string>
     <string name="metric_duration_total">总时长</string>
@@ -132,7 +130,6 @@
     <string name="about_intro_title">App 简介</string>
     <string name="about_intro_body">一款连接视障跑者与陪跑员的协同跑步应用，通过蓝牙实时传输方向引导指令与震动反馈，让视障人士也能安全奔跑。</string>
     <string name="about_features_title">核心功能</string>
-    <string name="about_feature_bluetooth">蓝牙配对</string>
     <string name="about_feature_joystick">方向摇杆</string>
     <string name="about_feature_tts">语音播报</string>
     <string name="about_feature_sos">紧急求助</string>

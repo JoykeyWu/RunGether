@@ -42,13 +42,6 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        // 仅供单元测试使用：基于内存的实例
-        fun buildInMemory(context: Context): AppDatabase {
-            return Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
-                .allowMainThreadQueries()
-                .build()
-        }
-
         private fun build(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()

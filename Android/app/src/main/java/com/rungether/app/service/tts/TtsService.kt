@@ -6,8 +6,6 @@ import android.speech.tts.UtteranceProgressListener
 import com.rungether.app.data.prefs.TtsSpeed
 import com.rungether.app.data.prefs.UserPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicLong
 
@@ -53,12 +51,6 @@ class TtsService private constructor(
         })
     }
 
-    // 引擎是否已就绪
-    val ready: StateFlow<Boolean> = _ready.asStateFlow()
-
-    // 是否正在播报
-    val speaking: StateFlow<Boolean> = _speaking.asStateFlow()
-
     // 播报一段文本：mode 决定是否打断当前队列
     fun speak(text: CharSequence, mode: Mode = Mode.QUEUE) {
         if (text.isBlank()) return
@@ -80,15 +72,6 @@ class TtsService private constructor(
     fun stop() {
         tts.stop()
         _speaking.value = false
-    }
-
-    // 释放底层引擎，进程关闭或切换角色时调用
-    fun shutdown() {
-        tts.stop()
-        tts.shutdown()
-        _ready.value = false
-        _speaking.value = false
-        instance = null
     }
 
     private fun applyLocale() {

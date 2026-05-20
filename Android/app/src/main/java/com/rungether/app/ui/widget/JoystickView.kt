@@ -140,12 +140,4 @@ class JoystickView @JvmOverloads constructor(
 
     // 仅在控件内部使用：将 dp 换算为 px
     private fun dp(value: Float): Float = value * resources.displayMetrics.density
-
-    // 仅供 UI 预览或在外部强制更新摇杆位置
-    fun setStickRelative(offsetX: Float, offsetY: Float) {
-        moveStick(centerX + offsetX, centerY + offsetY)
-        pressed = true
-        dispatchDirection()
-        invalidate()
-    }
 }

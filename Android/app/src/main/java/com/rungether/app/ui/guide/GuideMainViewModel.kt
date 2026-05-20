@@ -19,7 +19,6 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -77,9 +76,6 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
 
     // 连接状态流
     val connectionState: StateFlow<ConnectionState> = connectionManager.state
-
-    // 入站指令流，用于监听 SOS
-    val incomingCommands: SharedFlow<GuideCommand> = commandChannel.incoming
 
     init {
         viewModelScope.launch {

@@ -15,7 +15,6 @@
     <dimen name="radius_2xl">24dp</dimen>
 
     <dimen name="border_runner">4dp</dimen>
-    <dimen name="border_guide">1dp</dimen>
 
     <dimen name="text_guide_body">14sp</dimen>
     <dimen name="text_guide_body_lg">16sp</dimen>
@@ -27,11 +26,4 @@
     <dimen name="text_runner_body_lg">24sp</dimen>
     <dimen name="text_runner_title">28sp</dimen>
     <dimen name="text_runner_h1">36sp</dimen>
-    <dimen name="text_runner_h0">48sp</dimen>
-
-    <dimen name="toolbar_height_guide">52dp</dimen>
-    <dimen name="toolbar_height_runner">72dp</dimen>
-
-    <dimen name="btn_mega_height">120dp</dimen>
-    <dimen name="btn_guide_height">48dp</dimen>
 </resources>

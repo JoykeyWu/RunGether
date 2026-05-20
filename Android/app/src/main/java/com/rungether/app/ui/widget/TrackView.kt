@@ -72,25 +72,11 @@ class TrackView @JvmOverloads constructor(
         invalidate()
     }
 
-    // 追加一个经纬度点；调用方传入原始 GPS 坐标即可
-    fun addPoint(latitude: Double, longitude: Double) {
-        rawPoints.add(doubleArrayOf(latitude, longitude))
-        recomputePath()
-        invalidate()
-    }
-
     // 设置完整的轨迹点序列，用于历史详情页一次性加载
     fun setPoints(points: List<DoubleArray>) {
         rawPoints.clear()
         rawPoints.addAll(points)
         recomputePath()
-        invalidate()
-    }
-
-    // 清空轨迹
-    fun clear() {
-        rawPoints.clear()
-        mappedPath.reset()
         invalidate()
     }
 

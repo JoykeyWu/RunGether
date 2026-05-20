@@ -53,9 +53,6 @@ class UserPreferences private constructor(context: Context) {
             prefs.edit().putString(PrefKeys.KEY_LAST_PAIRED_MAC, value).apply()
         }
 
-    // 当前角色的可观察 StateFlow
-    fun observeRole(): StateFlow<UserRole> = roleFlow.asStateFlow()
-
     // TTS 语速的可观察 StateFlow
     fun observeTtsSpeed(): StateFlow<TtsSpeed> = ttsSpeedFlow.asStateFlow()
 

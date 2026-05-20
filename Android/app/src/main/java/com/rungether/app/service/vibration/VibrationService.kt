@@ -35,11 +35,6 @@ class VibrationService private constructor(appContext: Context) {
         }
     }
 
-    // 取消当前震动
-    fun cancel() {
-        vibrator?.cancel()
-    }
-
     private fun feedbackDirection(type: DirectionType) {
         when (type) {
             DirectionType.STRAIGHT -> Unit
