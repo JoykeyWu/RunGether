@@ -76,7 +76,7 @@
         android:focusable="true"
         android:paddingHorizontal="16dp"
         android:paddingVertical="6dp"
-        android:text="连接"
+        android:text="@string/bluetooth_btn_connect"
         android:textColor="@color/guide_brand"
         android:textSize="12sp"
         android:textStyle="bold" />

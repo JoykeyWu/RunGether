@@ -19,11 +19,11 @@
             android:id="@+id/btn_back"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/bg_circle_icon"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/action_back"
             android:focusable="true"
-            android:padding="8dp"
+            android:padding="6dp"
             android:src="@drawable/ic_chevron_left" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="关于"
+            android:text="@string/page_guide_about"
             android:textColor="@color/guide_navy"
             android:textSize="@dimen/text_guide_body_lg"
             android:textStyle="bold" />
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_md"
-                    android:text="RunGether"
+                    android:text="@string/app_brand"
                     android:textColor="@color/guide_navy"
                     android:textSize="@dimen/text_guide_h1"
                     android:textStyle="bold" />
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_sm"
-                        android:text="App 简介"
+                        android:text="@string/about_intro_title"
                         android:textColor="@color/guide_navy"
                         android:textSize="@dimen/text_guide_body"
                         android:textStyle="bold" />
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_sm"
                     android:lineSpacingExtra="4dp"
-                    android:text="一款连接视障跑者与陪跑员的协同跑步应用，通过蓝牙实时传输方向引导指令与震动反馈，让视障人士也能安全奔跑。"
+                    android:text="@string/about_intro_body"
                     android:textColor="@color/guide_navy_70"
                     android:textSize="@dimen/text_guide_body" />
             </LinearLayout>
@@ -167,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_sm"
-                        android:text="核心功能"
+                        android:text="@string/about_features_title"
                         android:textColor="@color/guide_navy"
                         android:textSize="@dimen/text_guide_body"
                         android:textStyle="bold" />
@@ -199,7 +199,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="蓝牙配对"
+                            android:text="@string/page_guide_bluetooth"
                             android:textColor="@color/guide_navy"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -224,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="方向摇杆"
+                            android:text="@string/about_feature_joystick"
                             android:textColor="@color/guide_navy"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -256,7 +256,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="语音播报"
+                            android:text="@string/about_feature_tts"
                             android:textColor="@color/guide_navy"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -281,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="紧急求助"
+                            android:text="@string/about_feature_sos"
                             android:textColor="@color/guide_navy"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -314,7 +314,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_sm"
-                        android:text="开发团队"
+                        android:text="@string/about_team_title"
                         android:textColor="@color/guide_navy"
                         android:textSize="@dimen/text_guide_body"
                         android:textStyle="bold" />
@@ -325,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_sm"
                     android:lineSpacingExtra="4dp"
-                    android:text="RunGether 开发小组"
+                    android:text="@string/team_body"
                     android:textColor="@color/guide_navy_70"
                     android:textSize="@dimen/text_guide_body" />
             </LinearLayout>
@@ -335,7 +335,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2xl"
                 android:gravity="center"
-                android:text="© 2026 RunGether"
+                android:text="@string/app_copyright"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="12sp" />
         </LinearLayout>

@@ -19,11 +19,11 @@
             android:id="@+id/btn_back"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/bg_circle_icon"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/action_back"
             android:focusable="true"
-            android:padding="8dp"
+            android:padding="6dp"
             android:src="@drawable/ic_chevron_left" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="跑步详情"
+            android:text="@string/history_detail_title"
             android:textColor="@color/guide_navy"
             android:textSize="@dimen/text_guide_body_lg"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="总距离"
+                        android:text="@string/metric_distance_total"
                         android:textColor="@color/guide_navy_45"
                         android:textSize="12sp" />
 
@@ -122,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:paddingBottom="2dp"
-                            android:text="km"
+                            android:text="@string/unit_km"
                             android:textColor="@color/guide_navy_45"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -137,7 +137,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="总时长"
+                        android:text="@string/metric_duration_total"
                         android:textColor="@color/guide_navy_45"
                         android:textSize="12sp" />
 
@@ -161,7 +161,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="平均配速"
+                        android:text="@string/metric_pace_avg"
                         android:textColor="@color/guide_navy_45"
                         android:textSize="12sp" />
 
@@ -186,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:paddingBottom="2dp"
-                            android:text="/km"
+                            android:text="@string/unit_pace_per_km"
                             android:textColor="@color/guide_navy_45"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -219,7 +219,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_sm"
-                        android:text="跑步轨迹"
+                        android:text="@string/history_track_label"
                         android:textColor="@color/guide_navy"
                         android:textSize="@dimen/text_guide_body"
                         android:textStyle="bold" />

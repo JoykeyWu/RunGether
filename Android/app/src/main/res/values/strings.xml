@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">助盲跑伴侣</string>
+    <string name="app_brand">RunGether</string>
+    <string name="app_copyright">© 2026 RunGether</string>
+    <string name="team_body">RunGether 开发小组</string>
 
     <string name="action_back">返回</string>
     <string name="action_ok">确定</string>
+    <string name="action_confirm">确认</string>
     <string name="action_cancel">取消</string>
     <string name="action_save">保存</string>
     <string name="action_delete">删除</string>
     <string name="action_edit">编辑</string>
     <string name="action_close">关闭</string>
+    <string name="action_add_contact">新增联系人</string>
+    <string name="action_back_home">返回主界面</string>
+    <string name="action_known">我知道了</string>
 
     <string name="role_guide">陪跑员</string>
     <string name="role_runner">视障跑者</string>
+    <string name="role_select_subtitle">视障跑者与陪跑员，一起奔跑</string>
+    <string name="role_runner_desc">我是视障跑者，需要陪跑引导</string>
+    <string name="role_guide_desc">我是陪跑员，为跑者提供引导</string>
+    <string name="role_switch_hint">角色可在设置页随时切换</string>
 
     <string name="page_role">角色选择</string>
     <string name="page_guide_main">陪跑员引导</string>
@@ -34,6 +45,98 @@
     <string name="page_runner_about">关于</string>
 
     <string name="placeholder_under_construction">骨架页，待页面开发阶段补全</string>
+
+    <string name="unit_km">km</string>
+    <string name="unit_km_zh">公里</string>
+    <string name="unit_pace_per_km">/km</string>
+    <string name="metric_distance_total">总距离</string>
+    <string name="metric_duration_total">总时长</string>
+    <string name="metric_pace_avg">平均配速</string>
+    <string name="metric_distance_short">距离 km</string>
+    <string name="metric_duration_short">时长</string>
+    <string name="metric_pace_short">配速 /km</string>
+    <string name="item_history_distance">公里</string>
+    <string name="item_history_duration">时长</string>
+    <string name="item_history_pace">配速</string>
+    <string name="placeholder_pace_dashes">—\'—\'\'</string>
+    <string name="placeholder_distance_zero">0.00</string>
+    <string name="placeholder_duration_zero">00:00</string>
+    <string name="placeholder_duration_zero_long">00:00:00</string>
+    <string name="placeholder_dash">—</string>
+    <string name="placeholder_distance_zero_km">0.00 公里</string>
+
+    <string name="bluetooth_rescan">重新搜索</string>
+    <string name="bluetooth_scanning">正在搜索附近设备…</string>
+    <string name="bluetooth_bonded_label">已配对设备</string>
+    <string name="bluetooth_bonded_empty">尚未配对盲人端设备</string>
+    <string name="bluetooth_nearby_label">附近设备</string>
+    <string name="bluetooth_select_hint">请选择视障跑者的手机进行配对</string>
+    <string name="bluetooth_btn_connect">连接</string>
+
+    <string name="guide_status_disconnected">未连接盲人端</string>
+    <string name="guide_idle_title">准备开始陪跑</string>
+    <string name="guide_idle_subtitle">先与盲人端建立蓝牙连接\n点击下方按钮开始本次陪跑</string>
+    <string name="guide_btn_start">开始陪跑</string>
+    <string name="guide_btn_end">结束陪跑</string>
+    <string name="guide_bluetooth_manage">蓝牙配对管理</string>
+    <string name="guide_metric_pace">实时配速 (/km)</string>
+    <string name="guide_metric_distance">累计距离 (km)</string>
+    <string name="guide_metric_duration">跑步时长</string>
+    <string name="guide_track_follow">实时位置跟随</string>
+    <string name="guide_joystick_label">方向摇杆</string>
+    <string name="guide_joystick_default">保持直行</string>
+    <string name="guide_shortcut_obstacle">障碍</string>
+    <string name="guide_shortcut_slow">减速</string>
+    <string name="guide_shortcut_stop">停止</string>
+    <string name="guide_sos_alert_title">跑者发起紧急求助！</string>
+    <string name="guide_sos_alert_body">请立即关注盲人端跑者的状况，并尽快赶至跑者位置或电话联系紧急联系人。</string>
+
+    <string name="guide_summary_title">本次陪跑结束</string>
+    <string name="guide_summary_subtitle">记录已自动保存并上传</string>
+    <string name="guide_summary_track_label">本次跑步轨迹</string>
+
+    <string name="guide_history_title">陪跑历史记录</string>
+    <string name="guide_history_empty_title">暂无陪跑记录</string>
+    <string name="guide_history_empty_subtitle">返回主界面发起一次陪跑后\n这里会自动出现完整记录</string>
+
+    <string name="dialog_delete_confirm_title">确认删除</string>
+
+    <string name="history_detail_title">跑步详情</string>
+    <string name="history_track_label">跑步轨迹</string>
+
+    <string name="contacts_empty_title">暂无紧急联系人</string>
+    <string name="contacts_empty_subtitle">点击右上角加号按钮\n添加常用联系人备用</string>
+    <string name="contacts_footer">紧急求助时将向以上联系人发起呼叫</string>
+    <string name="contacts_form_add_title">添加紧急联系人</string>
+    <string name="contacts_form_name_label">姓名</string>
+    <string name="contacts_form_phone_label">手机号</string>
+    <string name="contacts_delete_subtitle">删除后无法恢复</string>
+
+    <string name="settings_current_role">当前角色</string>
+    <string name="settings_role_guide_label">陪跑员（引导端）</string>
+    <string name="settings_switch_role">角色切换</string>
+    <string name="settings_section_tts">播报与反馈</string>
+    <string name="settings_tts_speed">语音播报速度</string>
+    <string name="settings_tts_slow">慢</string>
+    <string name="settings_tts_normal">正常</string>
+    <string name="settings_tts_fast">快</string>
+    <string name="settings_tts_demo">切换后将播报示例：开始跑步</string>
+    <string name="settings_vibration_title">震动反馈</string>
+    <string name="settings_vibration_subtitle">接收指令时启用震动提示</string>
+    <string name="settings_section_safety">安全</string>
+    <string name="settings_section_other">其他</string>
+    <string name="settings_about_subtitle">版本信息、团队介绍</string>
+    <string name="settings_switch_dialog_title">确认切换角色？</string>
+    <string name="settings_switch_dialog_subtitle">切换后将进入对应角色界面，当前未保存的状态可能丢失。</string>
+
+    <string name="about_intro_title">App 简介</string>
+    <string name="about_intro_body">一款连接视障跑者与陪跑员的协同跑步应用，通过蓝牙实时传输方向引导指令与震动反馈，让视障人士也能安全奔跑。</string>
+    <string name="about_features_title">核心功能</string>
+    <string name="about_feature_bluetooth">蓝牙配对</string>
+    <string name="about_feature_joystick">方向摇杆</string>
+    <string name="about_feature_tts">语音播报</string>
+    <string name="about_feature_sos">紧急求助</string>
+    <string name="about_team_title">开发团队</string>
 
     <string name="runner_status_connected">陪跑员已连接</string>
     <string name="runner_status_disconnected">未连接陪跑员</string>

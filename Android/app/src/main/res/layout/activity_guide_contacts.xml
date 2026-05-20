@@ -23,11 +23,11 @@
                 android:id="@+id/btn_back"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:background="@drawable/bg_circle_icon"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:contentDescription="@string/action_back"
                 android:focusable="true"
-                android:padding="8dp"
+                android:padding="6dp"
                 android:src="@drawable/ic_chevron_left" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="紧急联系人"
+                android:text="@string/page_guide_contacts"
                 android:textColor="@color/guide_navy"
                 android:textSize="@dimen/text_guide_body_lg"
                 android:textStyle="bold" />
@@ -46,7 +46,7 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_btn_brand_circle"
                 android:clickable="true"
-                android:contentDescription="新增联系人"
+                android:contentDescription="@string/action_add_contact"
                 android:focusable="true"
                 android:padding="8dp"
                 android:src="@drawable/ic_plus" />
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_md"
-                android:text="暂无紧急联系人"
+                android:text="@string/contacts_empty_title"
                 android:textColor="@color/guide_navy"
                 android:textSize="@dimen/text_guide_body_lg"
                 android:textStyle="bold" />
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:text="点击右上角加号按钮\n添加常用联系人备用"
+                android:text="@string/contacts_empty_subtitle"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="@dimen/text_guide_body" />
         </LinearLayout>
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="紧急求助时将向以上联系人发起呼叫"
+            android:text="@string/contacts_footer"
             android:textColor="@color/guide_navy_45"
             android:textSize="11sp" />
     </LinearLayout>
@@ -154,7 +154,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="添加紧急联系人"
+                    android:text="@string/contacts_form_add_title"
                     android:textColor="@color/guide_navy"
                     android:textSize="@dimen/text_guide_body_lg"
                     android:textStyle="bold" />
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_md"
-                android:text="姓名"
+                android:text="@string/contacts_form_name_label"
                 android:textColor="@color/guide_navy_70"
                 android:textSize="11sp" />
 
@@ -197,7 +197,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_md"
-                android:text="手机号"
+                android:text="@string/contacts_form_phone_label"
                 android:textColor="@color/guide_navy_70"
                 android:textSize="11sp" />
 
@@ -300,7 +300,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:text="删除后无法恢复"
+                android:text="@string/contacts_delete_subtitle"
                 android:textColor="@color/guide_navy_70"
                 android:textSize="@dimen/text_guide_body" />
 

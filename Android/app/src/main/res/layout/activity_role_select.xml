@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/space_xl"
-            android:text="RunGether"
+            android:text="@string/app_brand"
             android:textColor="@color/guide_navy"
             android:textSize="@dimen/text_guide_h0"
             android:textStyle="bold" />
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/space_lg"
-            android:text="视障跑者与陪跑员，一起奔跑"
+            android:text="@string/role_select_subtitle"
             android:textColor="@color/guide_navy_45"
             android:textSize="@dimen/text_guide_body" />
 
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="我是视障跑者，需要陪跑引导"
+                    android:text="@string/role_runner_desc"
                     android:textColor="#B3FFFFFF"
                     android:textSize="@dimen/text_guide_body" />
             </LinearLayout>
@@ -156,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="我是陪跑员，为跑者提供引导"
+                    android:text="@string/role_guide_desc"
                     android:textColor="#CCFFFFFF"
                     android:textSize="@dimen/text_guide_body" />
             </LinearLayout>
@@ -188,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_xs"
-            android:text="角色可在设置页随时切换"
+            android:text="@string/role_switch_hint"
             android:textColor="@color/guide_navy_45"
             android:textSize="12sp" />
     </LinearLayout>

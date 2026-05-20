@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_xs"
-                    android:text="—"
+                    android:text="@string/placeholder_dash"
                     android:textColor="@color/runner_high"
                     android:textSize="@dimen/text_runner_body_lg"
                     android:textStyle="bold" />
@@ -157,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_xs"
-                    android:text="00:00:00"
+                    android:text="@string/placeholder_duration_zero_long"
                     android:textColor="@color/runner_accent"
                     android:textSize="@dimen/text_runner_title"
                     android:textStyle="bold" />
@@ -207,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_xs"
-                    android:text="0.00 公里"
+                    android:text="@string/placeholder_distance_zero_km"
                     android:textColor="@color/runner_accent"
                     android:textSize="@dimen/text_runner_title"
                     android:textStyle="bold" />
@@ -257,7 +257,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_xs"
-                    android:text="—"
+                    android:text="@string/placeholder_dash"
                     android:textColor="@color/runner_high"
                     android:textSize="@dimen/text_runner_title"
                     android:textStyle="bold" />

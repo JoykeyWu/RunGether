@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="公里"
+                android:text="@string/item_history_distance"
                 android:textColor="@color/runner_overlay_white_65"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="时长"
+                android:text="@string/item_history_duration"
                 android:textColor="@color/runner_overlay_white_65"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="配速"
+                android:text="@string/item_history_pace"
                 android:textColor="@color/runner_overlay_white_65"
                 android:textSize="12sp" />
         </LinearLayout>

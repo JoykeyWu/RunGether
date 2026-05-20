@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="距离 km"
+                android:text="@string/metric_distance_short"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="时长"
+                android:text="@string/metric_duration_short"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="配速 /km"
+                android:text="@string/metric_pace_short"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="10sp" />
         </LinearLayout>

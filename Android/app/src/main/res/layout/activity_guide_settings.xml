@@ -30,11 +30,11 @@
                     android:id="@+id/btn_back"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
-                    android:background="@drawable/bg_circle_icon"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:contentDescription="@string/action_back"
                     android:focusable="true"
-                    android:padding="8dp"
+                    android:padding="6dp"
                     android:src="@drawable/ic_chevron_left" />
 
                 <TextView
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="设置"
+                    android:text="@string/page_guide_settings"
                     android:textColor="@color/guide_navy"
                     android:textSize="@dimen/text_guide_body_lg"
                     android:textStyle="bold" />
@@ -81,7 +81,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="当前角色"
+                        android:text="@string/settings_current_role"
                         android:textColor="#CCFFFFFF"
                         android:textSize="11sp" />
 
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="陪跑员（引导端）"
+                        android:text="@string/settings_role_guide_label"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/text_guide_body_lg"
                         android:textStyle="bold" />
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:text="角色切换"
+                        android:text="@string/settings_switch_role"
                         android:textColor="@color/color_white"
                         android:textSize="11sp"
                         android:textStyle="bold" />
@@ -131,7 +131,7 @@
                 android:layout_marginStart="@dimen/space_lg"
                 android:layout_marginTop="@dimen/space_lg"
                 android:layout_marginBottom="@dimen/space_sm"
-                android:text="播报与反馈"
+                android:text="@string/settings_section_tts"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -165,7 +165,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/space_sm"
-                            android:text="语音播报速度"
+                            android:text="@string/settings_tts_speed"
                             android:textColor="@color/guide_navy"
                             android:textSize="@dimen/text_guide_body"
                             android:textStyle="bold" />
@@ -190,7 +190,7 @@
                             android:focusable="true"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="慢"
+                            android:text="@string/settings_tts_slow"
                             android:textColor="@color/guide_navy"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -206,7 +206,7 @@
                             android:focusable="true"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="正常"
+                            android:text="@string/settings_tts_normal"
                             android:textColor="@color/color_white"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -222,7 +222,7 @@
                             android:focusable="true"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="快"
+                            android:text="@string/settings_tts_fast"
                             android:textColor="@color/guide_navy"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -245,7 +245,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="切换后将播报示例：开始跑步"
+                            android:text="@string/settings_tts_demo"
                             android:textColor="@color/guide_navy_45"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -282,7 +282,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="震动反馈"
+                            android:text="@string/settings_vibration_title"
                             android:textColor="@color/guide_navy"
                             android:textSize="@dimen/text_guide_body"
                             android:textStyle="bold" />
@@ -291,7 +291,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="接收指令时启用震动提示"
+                            android:text="@string/settings_vibration_subtitle"
                             android:textColor="@color/guide_navy_45"
                             android:textSize="11sp" />
                     </LinearLayout>
@@ -319,7 +319,7 @@
                 android:layout_marginStart="@dimen/space_lg"
                 android:layout_marginTop="@dimen/space_lg"
                 android:layout_marginBottom="@dimen/space_sm"
-                android:text="安全"
+                android:text="@string/settings_section_safety"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -357,7 +357,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="紧急联系人"
+                            android:text="@string/page_guide_contacts"
                             android:textColor="@color/guide_navy"
                             android:textSize="@dimen/text_guide_body"
                             android:textStyle="bold" />
@@ -411,7 +411,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="蓝牙配对管理"
+                            android:text="@string/guide_bluetooth_manage"
                             android:textColor="@color/guide_navy"
                             android:textSize="@dimen/text_guide_body"
                             android:textStyle="bold" />
@@ -441,7 +441,7 @@
                 android:layout_marginStart="@dimen/space_lg"
                 android:layout_marginTop="@dimen/space_lg"
                 android:layout_marginBottom="@dimen/space_sm"
-                android:text="其他"
+                android:text="@string/settings_section_other"
                 android:textColor="@color/guide_navy_45"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -475,7 +475,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="关于"
+                        android:text="@string/page_guide_about"
                         android:textColor="@color/guide_navy"
                         android:textSize="@dimen/text_guide_body"
                         android:textStyle="bold" />
@@ -484,7 +484,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="版本信息、团队介绍"
+                        android:text="@string/settings_about_subtitle"
                         android:textColor="@color/guide_navy_45"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -541,7 +541,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_md"
                 android:gravity="center"
-                android:text="确认切换角色？"
+                android:text="@string/settings_switch_dialog_title"
                 android:textColor="@color/guide_navy"
                 android:textSize="@dimen/text_guide_body_lg"
                 android:textStyle="bold" />
@@ -552,7 +552,7 @@
                 android:layout_marginTop="@dimen/space_sm"
                 android:gravity="center"
                 android:lineSpacingExtra="3dp"
-                android:text="切换后将进入对应角色界面，当前未保存的状态可能丢失。"
+                android:text="@string/settings_switch_dialog_subtitle"
                 android:textColor="@color/guide_navy_70"
                 android:textSize="@dimen/text_guide_body" />
 
@@ -589,7 +589,7 @@
                     android:focusable="true"
                     android:gravity="center"
                     android:paddingVertical="@dimen/space_md"
-                    android:text="确认"
+                    android:text="@string/action_confirm"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/text_guide_body"
                     android:textStyle="bold" />

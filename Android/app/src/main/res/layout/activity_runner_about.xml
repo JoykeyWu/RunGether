@@ -19,7 +19,7 @@
             android:id="@+id/btn_back"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:background="@drawable/bg_runner_back_icon"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/action_back"
             android:focusable="true"
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_lg"
                     android:letterSpacing="0.1"
-                    android:text="RunGether"
+                    android:text="@string/app_brand"
                     android:textColor="@color/runner_high"
                     android:textSize="30sp"
                     android:textStyle="bold" />
