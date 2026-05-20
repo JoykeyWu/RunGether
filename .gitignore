@@ -1,0 +1,18 @@
+# 仅交付：需求确认文档 + Android/ + .git/
+# 以下三项为开发期辅助资料，禁止入库
+/CLAUDE.md
+/UI设计稿/
+/开发计划.md
+
+# IDE / 编辑器
+.idea/
+.vscode/
+*.iml
+
+# 环境与机密
+local.properties
+*.env
+
+# 系统残留
+.DS_Store
+Thumbs.db
