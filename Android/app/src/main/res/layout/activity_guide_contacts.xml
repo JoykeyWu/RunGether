@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/guide_bg_light"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/space_lg"
+            android:paddingVertical="@dimen/space_md">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_circle_icon"
+                android:clickable="true"
+                android:contentDescription="@string/action_back"
+                android:focusable="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_chevron_left" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="紧急联系人"
+                android:textColor="@color/guide_navy"
+                android:textSize="@dimen/text_guide_body_lg"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_add_contact"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_btn_brand_circle"
+                android:clickable="true"
+                android:contentDescription="新增联系人"
+                android:focusable="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_plus" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/space_lg"
+            android:paddingTop="@dimen/space_md"
+            android:paddingBottom="80dp"
+            tools:listitem="@layout/item_guide_contact" />
+
+        <LinearLayout
+            android:id="@+id/empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_circle_brand_soft"
+                android:contentDescription="@null"
+                android:padding="16dp"
+                android:src="@drawable/ic_user"
+                android:tint="@color/guide_brand" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="暂无紧急联系人"
+                android:textColor="@color/guide_navy"
+                android:textSize="@dimen/text_guide_body_lg"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="点击右上角加号按钮\n添加常用联系人备用"
+                android:textColor="@color/guide_navy_45"
+                android:textSize="@dimen/text_guide_body" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/space_2xl"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_shield_halved"
+            android:tint="@color/guide_navy_45" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="紧急求助时将向以上联系人发起呼叫"
+            android:textColor="@color/guide_navy_45"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/form_sheet_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80090F47"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_bottom_sheet_white"
+            android:orientation="vertical"
+            android:padding="@dimen/space_2xl">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_form_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="添加紧急联系人"
+                    android:textColor="@color/guide_navy"
+                    android:textSize="@dimen/text_guide_body_lg"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btn_form_close"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:clickable="true"
+                    android:contentDescription="@string/action_close"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_xmark" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="姓名"
+                android:textColor="@color/guide_navy_70"
+                android:textSize="11sp" />
+
+            <EditText
+                android:id="@+id/et_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="请输入联系人姓名"
+                android:inputType="text"
+                android:maxLength="20"
+                android:paddingHorizontal="@dimen/space_lg"
+                android:paddingVertical="@dimen/space_md"
+                android:textColor="@color/guide_navy"
+                android:textColorHint="@color/guide_navy_45"
+                android:textSize="@dimen/text_guide_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="手机号"
+                android:textColor="@color/guide_navy_70"
+                android:textSize="11sp" />
+
+            <EditText
+                android:id="@+id/et_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="请输入 11 位手机号"
+                android:inputType="phone"
+                android:maxLength="13"
+                android:paddingHorizontal="@dimen/space_lg"
+                android:paddingVertical="@dimen/space_md"
+                android:textColor="@color/guide_navy"
+                android:textColorHint="@color/guide_navy_45"
+                android:textSize="@dimen/text_guide_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_lg"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_form_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_neutral_outline"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/space_md"
+                    android:text="@string/action_cancel"
+                    android:textColor="@color/guide_navy"
+                    android:textSize="@dimen/text_guide_body"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btn_form_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_brand_pill_md"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/space_md"
+                    android:text="@string/action_save"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_guide_body"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/delete_dialog_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80090F47"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/space_2xl"
+            android:background="@drawable/bg_dialog_white"
+            android:orientation="vertical"
+            android:padding="@dimen/space_xl">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_circle_danger_soft"
+                android:contentDescription="@null"
+                android:padding="12dp"
+                android:src="@drawable/ic_trash" />
+
+            <TextView
+                android:id="@+id/tv_delete_dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:gravity="center"
+                android:textColor="@color/guide_navy"
+                android:textSize="@dimen/text_guide_body_lg"
+                android:textStyle="bold"
+                tools:text="确认删除联系人 张伟？" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="删除后无法恢复"
+                android:textColor="@color/guide_navy_70"
+                android:textSize="@dimen/text_guide_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_lg"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_delete_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_neutral_outline"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/space_md"
+                    android:text="@string/action_cancel"
+                    android:textColor="@color/guide_navy"
+                    android:textSize="@dimen/text_guide_body"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btn_delete_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_danger_pill_md"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/space_md"
+                    android:text="@string/action_delete"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_guide_body"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

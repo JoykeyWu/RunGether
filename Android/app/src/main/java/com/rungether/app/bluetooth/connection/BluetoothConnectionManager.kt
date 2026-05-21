@@ -5,7 +5,11 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import com.rungether.app.constant.BluetoothConstants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +22,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.InputStream
@@ -41,18 +46,27 @@ class BluetoothConnectionManager(
 
     private val _state = MutableStateFlow<ConnectionState>(ConnectionState.Idle)
     private val _incoming = MutableSharedFlow<ByteArray>(extraBufferCapacity = 64)
+    private val _discovering = MutableStateFlow(false)
+    private val _discoveredDevices = MutableStateFlow<List<DiscoveredDevice>>(emptyList())
 
     private var socket: BluetoothSocket? = null
     private var inputStream: InputStream? = null
     private var outputStream: OutputStream? = null
     private var readJob: Job? = null
     private var reconnectAttempt: Int = 0
+    private var discoveryReceiver: BroadcastReceiver? = null
 
     // 连接状态流
     val state: StateFlow<ConnectionState> = _state.asStateFlow()
 
     // 原始入站字节流（按 socket 单次读返回粒度）
     val incomingBytes: SharedFlow<ByteArray> = _incoming.asSharedFlow()
+
+    // 是否正在扫描附近蓝牙设备
+    val discovering: StateFlow<Boolean> = _discovering.asStateFlow()
+
+    // 当前发现的设备列表
+    val discoveredDevices: StateFlow<List<DiscoveredDevice>> = _discoveredDevices.asStateFlow()
 
     // 已配对设备列表
     @SuppressLint("MissingPermission")
@@ -66,6 +80,32 @@ class BluetoothConnectionManager(
 
     // 蓝牙是否已开启
     fun isBluetoothEnabled(): Boolean = adapter()?.isEnabled == true
+
+    // 启动附近设备搜索
+    @SuppressLint("MissingPermission")
+    fun startDiscovery() {
+        val adapter = adapter() ?: return
+        if (!adapter.isEnabled) return
+        if (adapter.isDiscovering) adapter.cancelDiscovery()
+        _discoveredDevices.value = emptyList()
+        registerDiscoveryReceiver()
+        adapter.startDiscovery()
+        _discovering.value = true
+    }
+
+    // 停止附近设备搜索
+    @SuppressLint("MissingPermission")
+    fun stopDiscovery() {
+        val adapter = adapter() ?: return
+        if (adapter.isDiscovering) adapter.cancelDiscovery()
+        unregisterDiscoveryReceiver()
+        _discovering.value = false
+    }
+
+    // 当前连接的远端设备地址（若有）
+    fun connectedAddress(): String? {
+        return (_state.value as? ConnectionState.Connected)?.deviceAddress
+    }
 
     // 主动连接指定设备
     @SuppressLint("MissingPermission")
@@ -156,9 +196,70 @@ class BluetoothConnectionManager(
         return manager?.adapter
     }
 
+    @SuppressLint("MissingPermission")
+    private fun registerDiscoveryReceiver() {
+        if (discoveryReceiver != null) return
+        val filter = IntentFilter().apply {
+            addAction(BluetoothDevice.ACTION_FOUND)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+        }
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
+                        _discovering.value = true
+                    }
+                    BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
+                        _discovering.value = false
+                    }
+                    BluetoothDevice.ACTION_FOUND -> handleDeviceFound(intent)
+                }
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            appContext.registerReceiver(receiver, filter, Context.RECEIVER_EXPORTED)
+        } else {
+            appContext.registerReceiver(receiver, filter)
+        }
+        discoveryReceiver = receiver
+    }
+
+    private fun unregisterDiscoveryReceiver() {
+        val receiver = discoveryReceiver ?: return
+        runCatching { appContext.unregisterReceiver(receiver) }
+        discoveryReceiver = null
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun handleDeviceFound(intent: Intent) {
+        val device: BluetoothDevice? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+        }
+        device ?: return
+        val rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE)
+        val bonded = runCatching { device.bondState == BluetoothDevice.BOND_BONDED }.getOrDefault(false)
+        val name = runCatching { device.name }.getOrNull()
+        val item = DiscoveredDevice(
+            device = device,
+            name = name,
+            address = device.address,
+            rssi = rssi,
+            bonded = bonded
+        )
+        _discoveredDevices.update { current ->
+            val filtered = current.filterNot { it.address == item.address }
+            (filtered + item).sortedByDescending { it.rssi.toInt() }
+        }
+    }
+
     // 释放所有资源（在应用退出或角色切换时调用）
     fun release() {
         managerScope.launch {
+            unregisterDiscoveryReceiver()
             closeQuietly(triggerAlert = false)
         }
     }

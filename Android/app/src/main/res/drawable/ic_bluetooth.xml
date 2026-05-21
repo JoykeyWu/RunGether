@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="448"
+    android:viewportHeight="512"
+    android:tint="@color/guide_brand">
+    <path
+        android:fillColor="@color/guide_brand"
+        android:pathData="M196,29c10,-4 22,-2 30,5l128,112c5,5 9,12 9,19s-3,14 -9,19l-105,92l105,92c5,5 9,12 9,19s-3,14 -9,19l-128,112c-9,8 -21,9 -31,5s-16,-14 -16,-25L179,332L83,416c-10,9 -25,8 -34,-2s-8,-25 2,-34L160,283L51,189c-10,-9 -11,-24 -2,-34s24,-10 34,-2l96,84L179,53c0,-11 6,-21 17,-25zM227,222l60,-52l-60,-52L227,222zM227,290l0,104l60,-52l-60,-52z"/>
+</vector>

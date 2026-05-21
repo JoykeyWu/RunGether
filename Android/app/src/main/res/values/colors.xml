@@ -25,5 +25,12 @@
     <color name="runner_high_45">#73FFFFFF</color>
     <color name="runner_accent">#FFFFD700</color>
     <color name="runner_danger">#FFFF3B30</color>
+    <color name="runner_danger_pressed">#FFD12626</color>
     <color name="runner_success">#FF34D399</color>
+    <color name="runner_success_pressed">#FF1FA980</color>
+    <color name="runner_accent_pressed">#FFE6C200</color>
+    <color name="runner_overlay_white_10">#1AFFFFFF</color>
+    <color name="runner_overlay_white_30">#4DFFFFFF</color>
+    <color name="runner_overlay_white_40">#66FFFFFF</color>
+    <color name="runner_overlay_white_65">#A6FFFFFF</color>
 </resources>

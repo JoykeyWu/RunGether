@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@color/color_white">
 
     <LinearLayout
@@ -10,84 +9,187 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/space_3xl"
-        android:paddingVertical="@dimen/space_3xl">
+        android:paddingTop="80dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_role_logo"
             android:gravity="center"
-            android:layout_marginTop="@dimen/space_3xl">
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp">
 
-            <View
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/bg_role_logo" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RunGether"
-                android:textColor="@color/guide_navy"
-                android:textSize="@dimen/text_guide_h0"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/space_xl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/guide_navy_70"
-                android:textSize="@dimen/text_guide_body_lg"
-                android:layout_marginTop="@dimen/space_xs" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="视障跑者与陪跑员，一起奔跑"
-                android:textColor="@color/guide_navy_45"
-                android:textSize="@dimen/text_guide_body"
-                android:layout_marginTop="@dimen/space_md" />
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_shoe_prints" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="RunGether"
+            android:textColor="@color/guide_navy"
+            android:textSize="@dimen/text_guide_h0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="@string/app_name"
+            android:textColor="@color/guide_navy_70"
+            android:textSize="@dimen/text_guide_body_lg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_lg"
+            android:text="视障跑者与陪跑员，一起奔跑"
+            android:textColor="@color/guide_navy_45"
+            android:textSize="@dimen/text_guide_body" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/space_3xl" />
+            android:layout_height="48dp" />
 
-        <TextView
+        <LinearLayout
             android:id="@+id/btn_role_runner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_role_runner"
-            android:padding="@dimen/space_xl"
-            android:text="视障跑者\n我是视障跑者，需要陪跑引导"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_guide_body_lg"
-            android:textStyle="bold"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_xl">
 
-        <TextView
+            <View
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_role_icon_runner" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="-43dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_eye_slash" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_lg"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/role_runner"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_guide_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="我是视障跑者，需要陪跑引导"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="@dimen/text_guide_body" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_chevron_right" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btn_role_guide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_lg"
             android:background="@drawable/bg_role_guide"
-            android:padding="@dimen/space_xl"
-            android:text="陪跑员\n我是陪跑员，为跑者提供引导"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_guide_body_lg"
-            android:textStyle="bold"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_xl">
+
+            <View
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_role_icon_guide" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="-43dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_users" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_lg"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/role_guide"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_guide_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="我是陪跑员，为跑者提供引导"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="@dimen/text_guide_body" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_chevron_right" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_circle_info" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/space_2xl"
+            android:layout_marginStart="@dimen/space_xs"
             android:text="角色可在设置页随时切换"
             android:textColor="@color/guide_navy_45"
-            android:textSize="@dimen/text_guide_body" />
+            android:textSize="12sp" />
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>
