@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <solid android:color="@color/color_white" />
-    <stroke
-        android:width="1dp"
-        android:color="@color/guide_divider" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#334157FF">
+    <item android:id="@android:id/mask">
+        <shape android:shape="oval">
+            <solid android:color="@color/color_white" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#1A4157FF" />
+        </shape>
+    </item>
+</ripple>
