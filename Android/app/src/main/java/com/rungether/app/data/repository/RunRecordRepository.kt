@@ -14,7 +14,8 @@ import kotlinx.coroutines.flow.Flow
  */
 class RunRecordRepository(
     private val dao: RunRecordDao,
-    private val api: RunRecordApi
+    private val api: RunRecordApi,
+    private val transaction: suspend (block: suspend () -> Unit) -> Unit = { block -> block() }
 ) {
 
     // 观察本地全部跑步记录，按开始时间倒序
@@ -23,11 +24,16 @@ class RunRecordRepository(
     // 按本地主键读取单条跑步记录
     suspend fun findById(id: Long): RunRecordEntity? = dao.findById(id)
 
-    // 刷新远端记录到本地：拉取列表后回写到本地数据库
+    // 刷新远端记录到本地：以远端列表为唯一镜像，事务内先清掉旧镜像再写入新数据，
+    // 离线手工生成的（remote_id 为 NULL）保留不动
     suspend fun refreshFromRemote() {
         val remote = runCatching { api.listAll() }.getOrElse { return }
-        if (remote.isEmpty()) return
-        dao.insertAll(remote.map { it.toEntity() })
+        transaction {
+            dao.deleteAllRemote()
+            if (remote.isNotEmpty()) {
+                dao.insertAll(remote.map { it.toEntity() })
+            }
+        }
     }
 
     // 保存本次跑步：先落本地拿到本地主键，再异步上传远端并回写 remote_id

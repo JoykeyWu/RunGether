@@ -14,17 +14,23 @@ import kotlinx.coroutines.flow.Flow
  */
 class EmergencyContactRepository(
     private val dao: EmergencyContactDao,
-    private val api: EmergencyContactApi
+    private val api: EmergencyContactApi,
+    private val transaction: suspend (block: suspend () -> Unit) -> Unit = { block -> block() }
 ) {
 
     // 观察本地全部联系人
     fun observeAll(): Flow<List<EmergencyContactEntity>> = dao.observeAll()
 
-    // 刷新远端联系人到本地
+    // 刷新远端联系人到本地：以远端列表为唯一镜像，事务内先清掉旧镜像再写入新数据，
+    // 离线手工新增的（remote_id 为 NULL）保留不动
     suspend fun refreshFromRemote() {
         val remote = runCatching { api.listAll() }.getOrElse { return }
-        if (remote.isEmpty()) return
-        dao.insertAll(remote.map { it.toEntity() })
+        transaction {
+            dao.deleteAllRemote()
+            if (remote.isNotEmpty()) {
+                dao.insertAll(remote.map { it.toEntity() })
+            }
+        }
     }
 
     // 保存联系人到本地后同步远端

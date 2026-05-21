@@ -99,6 +99,11 @@ private class FakeRunRecordDao : RunRecordDao {
         store.clear()
     }
 
+    override suspend fun deleteAllRemote() {
+        val toRemove = store.values.filter { it.remoteId != null }.map { it.id }
+        toRemove.forEach { store.remove(it) }
+    }
+
     override suspend fun count(): Int = store.size
 }
 

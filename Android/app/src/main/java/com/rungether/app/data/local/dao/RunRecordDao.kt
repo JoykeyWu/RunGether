@@ -48,6 +48,10 @@ interface RunRecordDao {
     @Query("DELETE FROM run_record")
     suspend fun clear()
 
+    // 删除所有来自远端的镜像行，离线创建的（remote_id 为 NULL）保留
+    @Query("DELETE FROM run_record WHERE remote_id IS NOT NULL")
+    suspend fun deleteAllRemote()
+
     // 统计当前记录总数
     @Query("SELECT COUNT(*) FROM run_record")
     suspend fun count(): Int

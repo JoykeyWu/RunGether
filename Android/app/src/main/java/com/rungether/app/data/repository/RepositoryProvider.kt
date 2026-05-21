@@ -1,6 +1,7 @@
 package com.rungether.app.data.repository
 
 import android.content.Context
+import androidx.room.withTransaction
 import com.rungether.app.data.local.database.AppDatabase
 import com.rungether.app.data.remote.ApiClient
 
@@ -21,20 +22,26 @@ object RepositoryProvider {
     // 获取跑步记录仓库单例
     fun runRecord(context: Context): RunRecordRepository {
         return runRecordRepository ?: synchronized(this) {
-            runRecordRepository ?: RunRecordRepository(
-                dao = AppDatabase.getInstance(context).runRecordDao(),
-                api = ApiClient.runRecordApi
-            ).also { runRecordRepository = it }
+            runRecordRepository ?: AppDatabase.getInstance(context).let { db ->
+                RunRecordRepository(
+                    dao = db.runRecordDao(),
+                    api = ApiClient.runRecordApi,
+                    transaction = { block -> db.withTransaction { block() } }
+                )
+            }.also { runRecordRepository = it }
         }
     }
 
     // 获取紧急联系人仓库单例
     fun emergencyContact(context: Context): EmergencyContactRepository {
         return emergencyContactRepository ?: synchronized(this) {
-            emergencyContactRepository ?: EmergencyContactRepository(
-                dao = AppDatabase.getInstance(context).emergencyContactDao(),
-                api = ApiClient.emergencyContactApi
-            ).also { emergencyContactRepository = it }
+            emergencyContactRepository ?: AppDatabase.getInstance(context).let { db ->
+                EmergencyContactRepository(
+                    dao = db.emergencyContactDao(),
+                    api = ApiClient.emergencyContactApi,
+                    transaction = { block -> db.withTransaction { block() } }
+                )
+            }.also { emergencyContactRepository = it }
         }
     }
 }
