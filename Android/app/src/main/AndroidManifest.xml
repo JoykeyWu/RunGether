@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"
+        tools:ignore="PermissionImpliesUnsupportedHardware" />
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        tools:targetApi="s" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"
+        tools:targetApi="s" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RunGether.Guide">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.RunGether.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.role.RoleSelectActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RunGether.Guide" />
+
+        <activity
+            android:name=".ui.guide.GuideMainActivity"
+            android:exported="false"
+            android:label="@string/page_guide_main"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.bluetooth.BluetoothPairActivity"
+            android:exported="false"
+            android:label="@string/page_guide_bluetooth"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.summary.GuideSummaryActivity"
+            android:exported="false"
+            android:label="@string/page_guide_summary"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.history.GuideHistoryListActivity"
+            android:exported="false"
+            android:label="@string/page_guide_history"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.history.GuideHistoryDetailActivity"
+            android:exported="false"
+            android:label="@string/page_guide_history_detail"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.settings.GuideSettingsActivity"
+            android:exported="false"
+            android:label="@string/page_guide_settings"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.contacts.GuideContactsActivity"
+            android:exported="false"
+            android:label="@string/page_guide_contacts"
+            android:theme="@style/Theme.RunGether.Guide" />
+        <activity
+            android:name=".ui.about.GuideAboutActivity"
+            android:exported="false"
+            android:label="@string/page_guide_about"
+            android:theme="@style/Theme.RunGether.Guide" />
+
+        <activity
+            android:name=".ui.runner.RunnerMainActivity"
+            android:exported="false"
+            android:label="@string/page_runner_main"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.summary.RunnerSummaryActivity"
+            android:exported="false"
+            android:label="@string/page_runner_summary"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.sos.RunnerSosActivity"
+            android:exported="false"
+            android:label="@string/page_runner_sos"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.sos.RunnerCallActivity"
+            android:exported="false"
+            android:label="@string/page_runner_call"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.history.RunnerHistoryListActivity"
+            android:exported="false"
+            android:label="@string/page_runner_history"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.history.RunnerHistoryDetailActivity"
+            android:exported="false"
+            android:label="@string/page_runner_history_detail"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.settings.RunnerSettingsActivity"
+            android:exported="false"
+            android:label="@string/page_runner_settings"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.contacts.RunnerContactsActivity"
+            android:exported="false"
+            android:label="@string/page_runner_contacts"
+            android:theme="@style/Theme.RunGether.Runner" />
+        <activity
+            android:name=".ui.about.RunnerAboutActivity"
+            android:exported="false"
+            android:label="@string/page_runner_about"
+            android:theme="@style/Theme.RunGether.Runner" />
+    </application>
+</manifest>

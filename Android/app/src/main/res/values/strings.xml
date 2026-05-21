@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">助盲跑伴侣</string>
+
+    <string name="action_back">返回</string>
+    <string name="action_ok">确定</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_save">保存</string>
+    <string name="action_delete">删除</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_close">关闭</string>
+
+    <string name="role_guide">陪跑员</string>
+    <string name="role_runner">视障跑者</string>
+
+    <string name="page_role">角色选择</string>
+    <string name="page_guide_main">陪跑员引导</string>
+    <string name="page_guide_bluetooth">蓝牙配对</string>
+    <string name="page_guide_summary">跑步结算</string>
+    <string name="page_guide_history">历史记录</string>
+    <string name="page_guide_history_detail">历史详情</string>
+    <string name="page_guide_settings">设置</string>
+    <string name="page_guide_contacts">紧急联系人</string>
+    <string name="page_guide_about">关于</string>
+
+    <string name="page_runner_main">盲人端主界面</string>
+    <string name="page_runner_summary">跑步结算</string>
+    <string name="page_runner_sos">紧急求助</string>
+    <string name="page_runner_call">模拟呼叫</string>
+    <string name="page_runner_history">历史记录</string>
+    <string name="page_runner_history_detail">历史详情</string>
+    <string name="page_runner_settings">设置</string>
+    <string name="page_runner_contacts">紧急联系人</string>
+    <string name="page_runner_about">关于</string>
+
+    <string name="placeholder_under_construction">骨架页，待页面开发阶段补全</string>
+</resources>

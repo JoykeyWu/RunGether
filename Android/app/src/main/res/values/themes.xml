@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.RunGether.Base" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="android:windowContentTransitions">false</item>
+    </style>
+
+    <style name="Theme.RunGether.Launcher" parent="Theme.RunGether.Base">
+        <item name="android:windowBackground">@color/color_white</item>
+        <item name="android:statusBarColor">@color/color_white</item>
+        <item name="android:navigationBarColor">@color/color_white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="Theme.RunGether.Guide" parent="Theme.RunGether.Base">
+        <item name="colorPrimary">@color/guide_brand</item>
+        <item name="colorPrimaryVariant">@color/guide_brand_pressed</item>
+        <item name="colorOnPrimary">@color/color_white</item>
+        <item name="colorSecondary">@color/guide_brand_light</item>
+        <item name="colorOnSecondary">@color/color_white</item>
+        <item name="android:colorBackground">@color/guide_bg_light</item>
+        <item name="colorSurface">@color/color_white</item>
+        <item name="android:textColorPrimary">@color/guide_navy</item>
+        <item name="android:textColorSecondary">@color/guide_navy_70</item>
+        <item name="android:statusBarColor">@color/guide_bg_light</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:navigationBarColor">@color/guide_bg_light</item>
+        <item name="android:windowBackground">@color/guide_bg_light</item>
+        <item name="toolbarStyle">@style/Widget.RunGether.Guide.Toolbar</item>
+    </style>
+
+    <style name="Theme.RunGether.Runner" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="android:windowContentTransitions">false</item>
+        <item name="colorPrimary">@color/runner_accent</item>
+        <item name="colorPrimaryVariant">@color/runner_accent</item>
+        <item name="colorOnPrimary">@color/runner_bg</item>
+        <item name="colorSecondary">@color/runner_high</item>
+        <item name="colorOnSecondary">@color/runner_bg</item>
+        <item name="android:colorBackground">@color/runner_bg</item>
+        <item name="colorSurface">@color/runner_surface</item>
+        <item name="android:textColorPrimary">@color/runner_high</item>
+        <item name="android:textColorSecondary">@color/runner_high_70</item>
+        <item name="android:statusBarColor">@color/runner_bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/runner_bg</item>
+        <item name="android:windowBackground">@color/runner_bg</item>
+        <item name="toolbarStyle">@style/Widget.RunGether.Runner.Toolbar</item>
+    </style>
+
+    <style name="Widget.RunGether.Guide.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/color_white</item>
+        <item name="titleTextColor">@color/guide_navy</item>
+        <item name="subtitleTextColor">@color/guide_navy_70</item>
+        <item name="navigationIconTint">@color/guide_navy</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="titleTextAppearance">@style/TextAppearance.RunGether.Guide.Toolbar</item>
+    </style>
+
+    <style name="Widget.RunGether.Runner.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/runner_bg</item>
+        <item name="titleTextColor">@color/runner_high</item>
+        <item name="subtitleTextColor">@color/runner_high_70</item>
+        <item name="navigationIconTint">@color/runner_high</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:minHeight">@dimen/toolbar_height_runner</item>
+        <item name="titleTextAppearance">@style/TextAppearance.RunGether.Runner.Toolbar</item>
+    </style>
+
+    <style name="TextAppearance.RunGether.Guide.Toolbar" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/guide_navy</item>
+        <item name="android:textSize">@dimen/text_guide_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.RunGether.Runner.Toolbar" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/runner_high</item>
+        <item name="android:textSize">@dimen/text_runner_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.RunGether.Guide.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/guide_navy</item>
+        <item name="android:textSize">@dimen/text_guide_body</item>
+    </style>
+
+    <style name="TextAppearance.RunGether.Runner.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/runner_high</item>
+        <item name="android:textSize">@dimen/text_runner_body</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.RunGether.Guide.Card" parent="">
+        <item name="android:background">@drawable/bg_guide_card</item>
+        <item name="android:padding">@dimen/space_lg</item>
+    </style>
+
+    <style name="Widget.RunGether.Runner.Card" parent="">
+        <item name="android:background">@drawable/bg_runner_card</item>
+        <item name="android:padding">@dimen/space_lg</item>
+    </style>
+
+    <style name="Widget.RunGether.Guide.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/guide_brand</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:textSize">@dimen/text_guide_body_lg</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@dimen/btn_guide_height</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.RunGether.Runner.Button.Mega" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/runner_bg</item>
+        <item name="android:textColor">@color/runner_high</item>
+        <item name="android:textSize">@dimen/text_runner_h1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@dimen/btn_mega_height</item>
+        <item name="cornerRadius">@dimen/radius_xl</item>
+        <item name="strokeColor">@color/runner_border</item>
+        <item name="strokeWidth">@dimen/border_runner</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+</resources>
