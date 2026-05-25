@@ -1,7 +1,9 @@
 package com.rungether.app.ui.runner
 
 import android.Manifest
+import android.bluetooth.BluetoothAdapter
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.rungether.app.R
+import com.rungether.app.bluetooth.BluetoothModule
 import com.rungether.app.bluetooth.connection.ConnectionState
 import com.rungether.app.databinding.ActivityRunnerMainBinding
 import com.rungether.app.service.sensor.ShakeDetector
@@ -39,6 +42,7 @@ class RunnerMainActivity : BaseActivity<ActivityRunnerMainBinding>() {
     private val viewModel: RunnerMainViewModel by viewModels()
     private val shakeDetector by lazy { ShakeDetector.from(applicationContext) }
     private val ttsService by lazy { TtsService.from(applicationContext) }
+    private val connectionManager by lazy { BluetoothModule.connectionManager(applicationContext) }
     private var shakeJob: Job? = null
 
     private val permissionLauncher = registerForActivityResult(
@@ -49,6 +53,29 @@ class RunnerMainActivity : BaseActivity<ActivityRunnerMainBinding>() {
         } else {
             ttsService.speak("缺少必要权限，无法开始跑步", TtsService.Mode.FLUSH)
             toast("缺少必要权限，无法开始跑步")
+        }
+    }
+
+    // 申请蓝牙相关运行时权限（Android 12+ 的 CONNECT/ADVERTISE）
+    private val bluetoothPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { result ->
+        if (result.values.all { it }) {
+            requestDiscoverableAndListen()
+        } else {
+            toast("缺少蓝牙权限，陪跑员将无法连接")
+        }
+    }
+
+    // 申请系统可被发现窗口；resultCode 即用户授权的可见秒数，<=0 表示拒绝
+    private val discoverableLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode > 0) {
+            connectionManager.startListening()
+            toast("已开放陪跑员发现，正在等待连接")
+        } else {
+            toast("已拒绝蓝牙可被发现，陪跑员将无法连接")
         }
     }
 
@@ -81,6 +108,11 @@ class RunnerMainActivity : BaseActivity<ActivityRunnerMainBinding>() {
         viewModel.connectionState.collectOnStarted { renderConnection(it) }
     }
 
+    override fun initData() {
+        super.initData()
+        ensureBluetoothListeningReady()
+    }
+
     override fun onResume() {
         super.onResume()
         startShakeListening()
@@ -89,6 +121,44 @@ class RunnerMainActivity : BaseActivity<ActivityRunnerMainBinding>() {
     override fun onPause() {
         super.onPause()
         stopShakeListening()
+    }
+
+    override fun onDestroy() {
+        connectionManager.stopListening()
+        super.onDestroy()
+    }
+
+    // 已连接或正在连接时跳过；其它情形请求权限 → 可被发现 → 启动监听
+    private fun ensureBluetoothListeningReady() {
+        if (!connectionManager.isBluetoothSupported()) return
+        when (connectionManager.state.value) {
+            is ConnectionState.Connected, is ConnectionState.Connecting -> return
+            else -> Unit
+        }
+        if (!connectionManager.isBluetoothEnabled()) {
+            toast("请先开启蓝牙以便陪跑员发现")
+            return
+        }
+        val needed = mutableListOf<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            needed += Manifest.permission.BLUETOOTH_CONNECT
+            needed += Manifest.permission.BLUETOOTH_ADVERTISE
+        }
+        val missing = needed.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+        if (missing.isEmpty()) {
+            requestDiscoverableAndListen()
+        } else {
+            bluetoothPermissionLauncher.launch(missing.toTypedArray())
+        }
+    }
+
+    private fun requestDiscoverableAndListen() {
+        val intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).apply {
+            putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, DISCOVERABLE_DURATION_SEC)
+        }
+        discoverableLauncher.launch(intent)
     }
 
     private fun renderPhase(phase: RunnerRunPhase) {
@@ -178,5 +248,9 @@ class RunnerMainActivity : BaseActivity<ActivityRunnerMainBinding>() {
             val ss = (seconds % 60).coerceAtLeast(0)
             String.format(Locale.CHINA, "%02d:%02d", mm, ss)
         }
+    }
+
+    private companion object {
+        const val DISCOVERABLE_DURATION_SEC: Int = 300
     }
 }

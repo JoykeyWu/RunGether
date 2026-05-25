@@ -20,6 +20,14 @@ sealed class GuideCommand {
 
     // 状态同步指令：跑步开始、结束、心跳等
     data class Status(val type: StatusType, val payload: String? = null) : GuideCommand()
+
+    // 盲人端实时位置上报：经纬度 + 累计米数 + 已运行秒数；用于陪跑端绘制对端轨迹
+    data class Telemetry(
+        val latitude: Double,
+        val longitude: Double,
+        val accumulatedM: Double,
+        val elapsedSec: Long
+    ) : GuideCommand()
 }
 
 /**

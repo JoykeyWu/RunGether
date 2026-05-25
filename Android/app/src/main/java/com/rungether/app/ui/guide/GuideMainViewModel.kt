@@ -12,8 +12,6 @@ import com.rungether.app.bluetooth.protocol.StatusType
 import com.rungether.app.data.local.entity.RunRecordEntity
 import com.rungether.app.data.prefs.UserRole
 import com.rungether.app.data.repository.RepositoryProvider
-import com.rungether.app.service.location.LocationService
-import com.rungether.app.service.location.LocationUpdate
 import com.rungether.app.util.PaceFormatter
 import com.google.gson.Gson
 import kotlinx.coroutines.Job
@@ -37,7 +35,6 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
     private val appContext = application.applicationContext
     private val connectionManager = BluetoothModule.connectionManager(appContext)
     private val commandChannel = BluetoothModule.commandChannel(appContext)
-    private val locationService = LocationService.from(appContext)
     private val runRecordRepository = RepositoryProvider.runRecord(appContext)
 
     private val _phase = MutableStateFlow(GuideRunPhase.IDLE)
@@ -50,7 +47,6 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
 
     private var startedAt: Long = 0L
     private var tickerJob: Job? = null
-    private var locationJob: Job? = null
     private val lastDirectionSentMs = AtomicLong(0L)
 
     // 跑步阶段
@@ -80,14 +76,23 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         viewModelScope.launch {
             commandChannel.incoming.collect { command ->
-                if (command is GuideCommand.Sos) {
-                    _sosReceived.value = System.currentTimeMillis()
+                when (command) {
+                    is GuideCommand.Sos -> _sosReceived.value = System.currentTimeMillis()
+                    is GuideCommand.Telemetry -> onTelemetry(command)
+                    else -> Unit
                 }
             }
         }
     }
 
-    // 开始陪跑：重置数据、启动定时器与 GPS、通知对端跑步开始
+    // 仅在跑步阶段消费盲人端 Telemetry，避免 idle 状态被异常数据污染
+    private fun onTelemetry(telemetry: GuideCommand.Telemetry) {
+        if (_phase.value != GuideRunPhase.RUNNING) return
+        _distanceM.value = telemetry.accumulatedM
+        _trackPoints.update { it + doubleArrayOf(telemetry.latitude, telemetry.longitude) }
+    }
+
+    // 开始陪跑：重置数据、启动定时器、通知对端；轨迹与距离由盲人端 Telemetry 推送驱动
     fun startRun() {
         if (_phase.value == GuideRunPhase.RUNNING) return
         startedAt = System.currentTimeMillis()
@@ -99,17 +104,14 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
         _phase.value = GuideRunPhase.RUNNING
 
         startTicker()
-        startLocation()
         commandChannel.send(GuideCommand.Status(StatusType.START))
     }
 
-    // 结束陪跑：停止定时器与 GPS、通知对端、落本地并异步上传
+    // 结束陪跑：停止定时器、通知对端、落本地并异步上传
     fun endRun(onSaved: (Long) -> Unit) {
         if (_phase.value != GuideRunPhase.RUNNING) return
         tickerJob?.cancel()
         tickerJob = null
-        locationJob?.cancel()
-        locationJob = null
         commandChannel.send(GuideCommand.Status(StatusType.END))
         val duration = _elapsedSec.value
         val distance = _distanceM.value
@@ -163,25 +165,6 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    private fun startLocation() {
-        locationJob?.cancel()
-        if (!locationService.hasPermission()) return
-        locationJob = viewModelScope.launch {
-            runCatching {
-                locationService.start().collect { update ->
-                    onLocationUpdate(update)
-                }
-            }
-        }
-    }
-
-    private fun onLocationUpdate(update: LocationUpdate) {
-        _distanceM.value = update.accumulatedM
-        _trackPoints.update { points ->
-            points + doubleArrayOf(update.latitude, update.longitude)
-        }
-    }
-
     private fun directionText(type: DirectionType, angleDeg: Int): String {
         val side = if (angleDeg >= 0) "右" else "左"
         return when (type) {
@@ -200,7 +183,6 @@ class GuideMainViewModel(application: Application) : AndroidViewModel(applicatio
 
     override fun onCleared() {
         tickerJob?.cancel()
-        locationJob?.cancel()
         super.onCleared()
     }
 }

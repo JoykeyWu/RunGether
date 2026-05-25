@@ -17,11 +17,16 @@ object CommandCodec {
     private const val KEY_TYPE = "type"
     private const val KEY_ANGLE = "angle"
     private const val KEY_PAYLOAD = "payload"
+    private const val KEY_LATITUDE = "lat"
+    private const val KEY_LONGITUDE = "lng"
+    private const val KEY_ACCUMULATED_M = "accumulated_m"
+    private const val KEY_ELAPSED_SEC = "elapsed_sec"
 
     private const val KIND_DIRECTION = "direction"
     private const val KIND_SHORTCUT = "shortcut"
     private const val KIND_SOS = "sos"
     private const val KIND_STATUS = "status"
+    private const val KIND_TELEMETRY = "telemetry"
 
     private val gson = Gson()
 
@@ -48,6 +53,13 @@ object CommandCodec {
                     obj.addProperty(KEY_PAYLOAD, command.payload)
                 }
             }
+            is GuideCommand.Telemetry -> {
+                obj.addProperty(KEY_KIND, KIND_TELEMETRY)
+                obj.addProperty(KEY_LATITUDE, command.latitude)
+                obj.addProperty(KEY_LONGITUDE, command.longitude)
+                obj.addProperty(KEY_ACCUMULATED_M, command.accumulatedM)
+                obj.addProperty(KEY_ELAPSED_SEC, command.elapsedSec)
+            }
         }
         return gson.toJson(obj) + "\n"
     }
@@ -64,8 +76,17 @@ object CommandCodec {
             KIND_SHORTCUT -> parseShortcut(obj)
             KIND_SOS -> GuideCommand.Sos
             KIND_STATUS -> parseStatus(obj)
+            KIND_TELEMETRY -> parseTelemetry(obj)
             else -> null
         }
+    }
+
+    private fun parseTelemetry(obj: JsonObject): GuideCommand? {
+        val lat = obj.get(KEY_LATITUDE)?.asDouble ?: return null
+        val lng = obj.get(KEY_LONGITUDE)?.asDouble ?: return null
+        val accumulated = obj.get(KEY_ACCUMULATED_M)?.asDouble ?: 0.0
+        val elapsed = obj.get(KEY_ELAPSED_SEC)?.asLong ?: 0L
+        return GuideCommand.Telemetry(lat, lng, accumulated, elapsed)
     }
 
     private fun parseDirection(obj: JsonObject): GuideCommand? {

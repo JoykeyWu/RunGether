@@ -13,6 +13,9 @@ object BluetoothConstants {
     // 经典蓝牙串口协议（SPP）标准 UUID，双端必须保持一致
     val SPP_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
+    // 盲人端 SDP 记录中的服务名，仅用于陪跑员端识别
+    const val SPP_SERVICE_NAME: String = "RunGether-SPP"
+
     // 自动重连最大尝试次数
     const val MAX_RECONNECT_ATTEMPTS: Int = 5
 

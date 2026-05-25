@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -15,6 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +25,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.InputStream
@@ -55,6 +58,8 @@ class BluetoothConnectionManager(
     private var readJob: Job? = null
     private var reconnectAttempt: Int = 0
     private var discoveryReceiver: BroadcastReceiver? = null
+    private var serverSocket: BluetoothServerSocket? = null
+    private var acceptJob: Job? = null
 
     // 连接状态流
     val state: StateFlow<ConnectionState> = _state.asStateFlow()
@@ -114,6 +119,23 @@ class BluetoothConnectionManager(
         managerScope.launch { performConnect(device) }
     }
 
+    // 启动盲人端 SPP 服务端监听，循环 accept 直到调用 stopListening
+    @SuppressLint("MissingPermission")
+    fun startListening() {
+        val adapter = adapter() ?: return
+        if (!adapter.isEnabled) return
+        if (acceptJob?.isActive == true) return
+        acceptJob = managerScope.launch { acceptLoop(adapter) }
+    }
+
+    // 停止盲人端服务端监听并释放 ServerSocket
+    fun stopListening() {
+        acceptJob?.cancel()
+        acceptJob = null
+        runCatching { serverSocket?.close() }
+        serverSocket = null
+    }
+
     // 发送一段字节到对端
     fun send(bytes: ByteArray): Boolean {
         val out = outputStream ?: return false
@@ -122,6 +144,46 @@ class BluetoothConnectionManager(
             out.flush()
             true
         }.getOrDefault(false)
+    }
+
+    // 服务端 accept 主循环：被对端连上后阻塞读，直到断开再回到下一轮 accept
+    @SuppressLint("MissingPermission")
+    private suspend fun acceptLoop(adapter: BluetoothAdapter) {
+        while (currentCoroutineContext().isActive) {
+            val server = runCatching {
+                adapter.listenUsingRfcommWithServiceRecord(
+                    BluetoothConstants.SPP_SERVICE_NAME,
+                    BluetoothConstants.SPP_UUID
+                )
+            }.getOrNull() ?: return
+            serverSocket = server
+            val accepted = runCatching { server.accept() }.getOrNull()
+            runCatching { server.close() }
+            serverSocket = null
+            if (accepted == null) return
+            socket = accepted
+            inputStream = accepted.inputStream
+            outputStream = accepted.outputStream
+            reconnectAttempt = 0
+            val device = accepted.remoteDevice
+            _state.value = ConnectionState.Connected(
+                runCatching { device.name }.getOrNull(),
+                device.address
+            )
+            readUntilDisconnect()
+            closeQuietly(triggerAlert = true)
+        }
+    }
+
+    // 服务端读循环，对端断开时返回，由 acceptLoop 进入下一轮 accept
+    private suspend fun readUntilDisconnect() {
+        val buffer = ByteArray(1024)
+        val input = inputStream ?: return
+        while (currentCoroutineContext().isActive) {
+            val read = runCatching { input.read(buffer) }.getOrElse { -1 }
+            if (read <= 0) return
+            _incoming.tryEmit(buffer.copyOf(read))
+        }
     }
 
     @SuppressLint("MissingPermission")

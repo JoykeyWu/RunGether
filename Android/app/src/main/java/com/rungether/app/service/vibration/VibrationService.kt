@@ -32,6 +32,7 @@ class VibrationService private constructor(appContext: Context) {
             is GuideCommand.Shortcut -> feedbackShortcut(command.type)
             GuideCommand.Sos -> playPattern(longArrayOf(0, VibrationConstants.LONG_MS, 200, VibrationConstants.LONG_MS))
             is GuideCommand.Status -> Unit
+            is GuideCommand.Telemetry -> Unit
         }
     }
 

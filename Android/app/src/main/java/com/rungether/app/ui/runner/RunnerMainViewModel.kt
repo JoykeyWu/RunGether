@@ -52,6 +52,7 @@ class RunnerMainViewModel(application: Application) : AndroidViewModel(applicati
     private var locationJob: Job? = null
     private var lastSpokenDirection: DirectionType? = null
     private var lastDirectionSpokenAt: Long = 0L
+    private var lastTelemetrySentAt: Long = 0L
 
     // 跑步阶段
     val phase: StateFlow<RunnerRunPhase> = _phase.asStateFlow()
@@ -144,6 +145,22 @@ class RunnerMainViewModel(application: Application) : AndroidViewModel(applicati
     private fun onLocationUpdate(update: LocationUpdate) {
         _distanceM.value = update.accumulatedM
         _trackPoints.update { it + doubleArrayOf(update.latitude, update.longitude) }
+        broadcastTelemetry(update)
+    }
+
+    // 经过精度/抖动过滤的位置才会进到这里，1 秒一次节流广播给陪跑端
+    private fun broadcastTelemetry(update: LocationUpdate) {
+        val now = System.currentTimeMillis()
+        if (now - lastTelemetrySentAt < TELEMETRY_INTERVAL_MS) return
+        lastTelemetrySentAt = now
+        commandChannel.send(
+            GuideCommand.Telemetry(
+                latitude = update.latitude,
+                longitude = update.longitude,
+                accumulatedM = update.accumulatedM,
+                elapsedSec = _elapsedSec.value
+            )
+        )
     }
 
     private fun handleIncoming(command: GuideCommand) {
@@ -153,6 +170,7 @@ class RunnerMainViewModel(application: Application) : AndroidViewModel(applicati
             is GuideCommand.Shortcut -> ttsService.speak(shortcutText(command.type), TtsService.Mode.FLUSH)
             GuideCommand.Sos -> Unit
             is GuideCommand.Status -> speakStatus(command.type)
+            is GuideCommand.Telemetry -> Unit
         }
     }
 
@@ -195,5 +213,10 @@ class RunnerMainViewModel(application: Application) : AndroidViewModel(applicati
         tickerJob?.cancel()
         locationJob?.cancel()
         super.onCleared()
+    }
+
+    private companion object {
+        // 位置上报最小间隔，避免高频写满蓝牙串口
+        const val TELEMETRY_INTERVAL_MS = 1_000L
     }
 }

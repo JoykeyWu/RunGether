@@ -57,7 +57,12 @@ class BluetoothPairActivity : BaseActivity<ActivityBluetoothPairBinding>() {
 
     override fun initObserver() {
         super.initObserver()
-        connectionManager.state.collectOnStarted { state -> renderBondedList(state) }
+        connectionManager.state.collectOnStarted { state ->
+            renderBondedList(state)
+            if (state is ConnectionState.Error) {
+                toast("蓝牙连接失败：${state.message}")
+            }
+        }
         connectionManager.discovering.collectOnStarted { scanning ->
             renderScanStatus(scanning = scanning, granted = true)
         }

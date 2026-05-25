@@ -2,6 +2,7 @@ package com.rungether.app.ui.guide
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -142,18 +143,15 @@ class GuideMainActivity : BaseActivity<ActivityGuideMainBinding>() {
         }
     }
 
+    // 陪跑端定位由盲人端 Telemetry 推送驱动，本机仅需蓝牙权限
     private fun requestPermissionsAndStart() {
-        val permissions = mutableListOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+        val permissions = mutableListOf<String>()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             permissions += Manifest.permission.BLUETOOTH_CONNECT
             permissions += Manifest.permission.BLUETOOTH_SCAN
         }
         val missing = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) !=
-                android.content.pm.PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }
         if (missing.isEmpty()) {
             viewModel.startRun()
