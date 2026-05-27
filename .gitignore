@@ -25,6 +25,10 @@ Android/app/release/
 *.apk
 *.dm
 
+# 例外：作业 6 交付 APK 保留入库
+!/apk/
+!/apk/*.apk
+
 # Inspect Code 导出的报告
 /*.xml
 /.descriptions.xml
