@@ -33,7 +33,12 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            // 仅当 keystore 文件存在时使用自定义签名，否则回退到 debug 签名
+            signingConfig = if (file("rungether.keystore").exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -41,7 +46,11 @@ android {
             )
         }
         debug {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = if (file("rungether.keystore").exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 

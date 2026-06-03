@@ -22,7 +22,7 @@
 
 | 文件 | 用途 | 路径 |
 |---|---|---|
-| `app-debug.apk` | 调试包（作业要求） | [`/apk/app-debug.apk`](./apk/app-debug.apk) |
+| `app-debug.apk` | 调试包 | [`/apk/app-debug.apk`](./apk/app-debug.apk) |
 | `app-release.apk` | 发布包（推荐安装，体积更小） | [`/apk/app-release.apk`](./apk/app-release.apk) |
 
 > debug 与 release 共用同一份 keystore，**可互相覆盖安装**。
@@ -51,7 +51,6 @@
 RunGether/
 ├── apk/                           APK 安装包（debug + release 各一份）
 ├── ARCHITECTURE.md                架构说明（MVVM 分层、类职责清单）
-├── 作业4-UI集成与核心流程-说明.md      大作业 4 验收对照与核心流程
 ├── Android/                       应用源码（Gradle 工程根，所有构建命令在此目录执行）
 │   ├── app/
 │   │   ├── src/main/java/com/rungether/app/
@@ -87,12 +86,10 @@ RunGether/
 │   │   │   └── constant/
 │   │   ├── src/main/res/          布局 / 资源（含 values-night/ 盲人端高对比主题）
 │   │   ├── src/test/              单元测试
-│   │   ├── src/androidTest/       仪表测试
-│   │   ├── rungether.keystore     签名证书
-│   │   └── release/app-release.apk 预编译可直装 APK
+│   │   └── src/androidTest/       仪表测试
 │   ├── gradle/libs.versions.toml  版本目录（Version Catalog）
 │   └── build.gradle.kts / settings.gradle.kts
-└── 助盲跑伴侣App_需求确认文档.md      v6 需求基线（权威）
+└── README.md                      项目说明
 ```
 
 ---
@@ -132,14 +129,14 @@ cd Android
 
 ### 签名信息
 
-`app/build.gradle.kts` 中 `signingConfigs.release` 已落地，**debug 与 release 共用同一份 keystore**，避免调试包与发布包签名冲突无法覆盖安装。
+`app/build.gradle.kts` 中 `signingConfigs.release` 已配置，你需要提供自己的 keystore：
 
 | 项 | 值 |
 |---|---|
-| 文件 | `Android/app/rungether.keystore` |
-| alias | `123456` |
+| 文件 | `Android/app/rungether.keystore`（需自行生成） |
+| 生成命令 | `keytool -genkey -v -keystore rungether.keystore -alias 123456 -keyalg RSA -keysize 2048 -validity 10000` |
 
-> ⚠️ **注意**：以上为开发/演示用签名，**生产环境请替换为正式证书并妥善保管密码**。该 keystore 仅用于作业交付与本地调试。
+> ⚠️ **注意**：keystore 未提交到仓库，首次构建 release 前请先生成。debug 签名使用 Android 默认调试证书，无需额外配置。
 
 ---
 
@@ -193,6 +190,6 @@ cd Android
 
 ---
 
-## 需求基线
+## 许可证
 
-详见仓库根 [`助盲跑伴侣App_需求确认文档.md`](./助盲跑伴侣App_需求确认文档.md)（v6 已确认版本），实现细节与本文档保持一致。
+本项目仅用于学习与交流，不构成商业用途。详情见 [MIT License](https://opensource.org/licenses/MIT)。

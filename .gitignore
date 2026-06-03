@@ -1,9 +1,3 @@
-# 仅交付：需求确认文档 + Android/ + .git/
-# 以下三项为开发期辅助资料，禁止入库
-/CLAUDE.md
-/UI设计稿/
-/开发计划.md
-
 # IDE / 编辑器
 .idea/
 .vscode/
@@ -12,6 +6,8 @@
 # 环境与机密
 local.properties
 *.env
+*.keystore
+*.jks
 
 # 系统残留
 .DS_Store
@@ -26,7 +22,7 @@ Android/app/release/
 *.apk
 *.dm
 
-# 例外：作业 6 交付 APK 保留入库
+# 预编译 APK 保留入库
 !/apk/
 !/apk/*.apk
 
