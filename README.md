@@ -48,8 +48,8 @@
 ## 仓库结构
 
 ```
-400-Ming/
-├── apk/                           作业 6 交付 APK（debug + release 各一份）
+RunGether/
+├── apk/                           APK 安装包（debug + release 各一份）
 ├── ARCHITECTURE.md                架构说明（MVVM 分层、类职责清单）
 ├── 作业4-UI集成与核心流程-说明.md      大作业 4 验收对照与核心流程
 ├── Android/                       应用源码（Gradle 工程根，所有构建命令在此目录执行）
@@ -137,8 +137,9 @@ cd Android
 | 项 | 值 |
 |---|---|
 | 文件 | `Android/app/rungether.keystore` |
-| store / key 密码 | `123456` |
 | alias | `123456` |
+
+> ⚠️ **注意**：以上为开发/演示用签名，**生产环境请替换为正式证书并妥善保管密码**。该 keystore 仅用于作业交付与本地调试。
 
 ---
 
