@@ -16,6 +16,7 @@ local.properties
 # 系统残留
 .DS_Store
 Thumbs.db
+~*.docx
 
 # Android 构建产物
 Android/app/build/
